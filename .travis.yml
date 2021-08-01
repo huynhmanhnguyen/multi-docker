@@ -2,10 +2,10 @@ sudo: require
 services:
   - docker
 before_install:
-  - docker build -t huynhmanhnguyen/react-test  -f ./client/Dockerfile.dev ./client
+  - docker build -t huynhmanhnguyen/react-dev -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run huynhmanhnguyen/react-test npm test -- --coverage
+  - docker run huynhmanhnguyen/react-dev npm test -- --coverage
 
 after_success:
   - docker build -t huynhmanhnguyen/multi-client ./client
