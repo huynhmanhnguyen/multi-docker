@@ -1,24 +1,22 @@
-#sudo: require
+sudo: required
 services:
   - docker
 
 before_install:
-  - gem install bundler --pre
-  - docker build -t huynhmanhnguyen/react-dev -f ./client/Dockerfile.dev ./client
+  - docker build -t nguyenhuynh/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run huynhmanhnguyen/react-dev npm  test -- --coverage
+  - docker run nguyenhuynh/react-test npm test -- --coverage
 
 after_success:
   - docker build -t nguyenhuynh/multi-client ./client
   - docker build -t nguyenhuynh/multi-nginx ./nginx
   - docker build -t nguyenhuynh/multi-server ./server
-  - docker build -t nguyenhuynh/multi-worker ./worker
-  # login to docker Cli
-  - echo "$DOCKER_PASSWORK" | docker login -u "$DOCKER_ID" --PASSWORD-stdin
-  # take those images and push them to docker hub
+  - docker build -t stephengrider/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
   - docker push nguyenhuynh/multi-client
   - docker push nguyenhuynh/multi-nginx
   - docker push nguyenhuynh/multi-server
   - docker push nguyenhuynh/multi-worker
-
