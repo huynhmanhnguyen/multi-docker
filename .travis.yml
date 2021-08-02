@@ -8,12 +8,12 @@ script:
   - docker run huynhmanhnguyen/react-dev npm  test -- --coverage
 
 after_success:
-  - docker build -t huynhmanhnguyen/multi-client ./client
-  - docker build -t huynhmanhnguyen/multi-nginx ./nginx
-  - docker build -t huynhmanhnguyen/multi-server ./server
-  - docker build -t huynhmanhnguyen/multi-worker ./worker
+  - docker build -t nguyenhuynh/multi-client ./client
+  - docker build -t nguyenhuynh/multi-nginx ./nginx
+  - docker build -t nguyenhuynh/multi-server ./server
+  - docker build -t nguyenhuynh/multi-worker ./worker
   # login to docker Cli
-  - echo "$DOCKER_PASSWORK" | docker login -u "$DOCKER_ID" --PASSWORD-STDIN
+  - echo "$DOCKER_PASSWORK" | docker login -u "$DOCKER_ID" --PASSWORD-stdin
   # take those images and push them to docker hub
   - docker push nguyenhuynh/multi-client
   - docker push nguyenhuynh/multi-nginx
