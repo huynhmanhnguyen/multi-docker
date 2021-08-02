@@ -3,6 +3,7 @@ services:
   - docker
 
 before_install:
+  - gem install bundler --pre
   - docker build -t huynhmanhnguyen/react-dev -f ./client/Dockerfile.dev ./client
 
 script:
